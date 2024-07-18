@@ -409,48 +409,115 @@
 -->
 
   <!-- Modal -->
-  <div id="edit-modal" class="fixed inset-0  bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+  <div id="edit-modal" class="fixed inset-0 hidden  bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg overflow-hidden shadow-xl max-w-lg w-full p-6">
-      <span class="close absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer">&times;</span>
+      <span class="close absolute top-4 right-4 text-white hover:text-gray-700 cursor-pointer">&times;</span>
       <h2 class="text-xl font-bold mb-4">Edit Package Info</h2>
-      <form id="edit-form" class="space-y-4">
-        <div>
+      <form id="edit-form" class=" grid grid-cols-2 md:grid-cols-2 gap-4 p-4">
+        <div class="col-span-1">
           <label for="trackingId" class="block text-sm font-medium text-gray-700">Tracking ID</label>
           <input type="text" id="trackingId" name="trackingId" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" readonly>
         </div>
-        <div>
+        <div class="col-span-1">
           <label for="packageName" class="block text-sm font-medium text-gray-700">Package Name</label>
           <input type="text" id="packageName" name="packageName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
-        <div>
+        <div class="col-span-1">
           <label for="pickup" class="block text-sm font-medium text-gray-700">Pick-up Location</label>
           <input type="text" id="pickup" name="pickup" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
-        <div>
+        <div class="col-span-1">
           <label for="destination" class="block text-sm font-medium text-gray-700">Destination</label>
           <input type="text" id="destination" name="destination" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
-        <div>
+        <div class="col-span-1">
           <label for="current" class="block text-sm font-medium text-gray-700">Current Location</label>
           <input type="text" id="current" name="current" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
-        <div>
-          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoints</label>
-          <textarea id="checkpoints" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 1</label>
+          <textarea id="checkpoints-1" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
         </div>
-        <div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 2</label>
+          <textarea id="checkpoints-2" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 3</label>
+          <textarea id="checkpoints-3" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 4</label>
+          <textarea id="checkpoints-4" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
           <label for="packageDescription" class="block text-sm font-medium text-gray-700">Package Description</label>
           <input type="text" id="packageDescription" name="packageDescription" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
-        <div>
-          <label for="packageStatus" class="block text-sm font-medium text-gray-700">Status</label>
-          <select id="packageStatus" name="packageStatus" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-            <option value="in transit">In Transit</option>
-            <option value="delivered">Delivered</option>
-          </select>
+        <div class="col-span-1">
+          <label for="packageStatus" class="block text-sm font-medium text-gray-700">Package Status</label>
+          <input type="text" id="packageStatus" name="packageStatus" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
         </div>
         <div class="flex justify-end">
           <button id="submitForm" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Modal -->
+  <div id="create-modal" class="fixed  inset-0 hidden bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg overflow-hidden shadow-xl max-w-lg w-full p-6">
+      <span class="close absolute top-4 right-4 text-white hover:text-gray-700 cursor-pointer">&times;</span>
+      <h2 class="text-xl font-bold mb-4">Create Package Info</h2>
+      <form id="edit-form" class=" grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <div class="col-span-1">
+          <label for="trackingId" class="block text-sm font-medium text-gray-700">Tracking ID</label>
+          <input type="text" id="create-trackingId" name="trackingId" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-1">
+          <label for="packageName" class="block text-sm font-medium text-gray-700">Package Name</label>
+          <input type="text" id="create-packageName" name="packageName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-1">
+          <label for="pickup" class="block text-sm font-medium text-gray-700">Pick-up Location</label>
+          <input type="text" id="create-pickup" name="pickup" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-1">
+          <label for="destination" class="block text-sm font-medium text-gray-700">Destination</label>
+          <input type="text" id="create-destination" name="destination" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-1">
+          <label for="current" class="block text-sm font-medium text-gray-700">Current Location</label>
+          <input type="text" id="create-current" name="current" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 1</label>
+          <textarea id="create-checkpoints-1" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 2</label>
+          <textarea id="create-checkpoints-2" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 3</label>
+          <textarea id="create-checkpoints-3" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="checkpoints" class="block text-sm font-medium text-gray-700">Checkpoint 4</label>
+          <textarea id="create-checkpoints-4" name="checkpoints" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="col-span-1">
+          <label for="packageStatus" class="block text-sm font-medium text-gray-700">Package Status</label>
+          <input type="text" id="create-packageStatus" name="packageStatus" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+        <div class="col-span-2">
+          <label for="packageDescription" class="block text-sm font-medium text-gray-700">Package Description</label>
+          <input type="text" id="create-packageDescription" name="packageDescription" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        </div>
+       
+        <div class="col-span-2 flex justify-end">
+          <button id="submitCreateForm" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save Changes</button>
         </div>
       </form>
     </div>
@@ -477,13 +544,13 @@
           <circle cx="17" cy="18" r="2"></circle>
           <circle cx="7" cy="18" r="2"></circle>
         </svg>
-        <span class="text-xl font-bold">Acme Logistics</span>
+        <span class="text-xl font-bold">Right Door Delivery</span>
       </a>
       <nav class="flex items-center gap-4">
-        <a class="hover:underline" href="#" rel="ugc">
-          Packages
+        <a class="hover:underline" id="create-package" rel="ugc">
+          Create Package
         </a>
-        <a class="hover:underline" href="#" rel="ugc">
+        <!-- <a class="hover:underline" href="#" rel="ugc">
           Customers
         </a>
         <a class="hover:underline" href="#" rel="ugc">
@@ -491,7 +558,7 @@
         </a>
         <a class="hover:underline" href="#" rel="ugc">
           Settings
-        </a>
+        </a> -->
       </nav>
     </header>
     <main class="flex-1 p-6">
@@ -504,21 +571,21 @@
             <thead class="[&amp;_tr]:border-b">
               <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Tracking #
+                  Tracking ID
                 </th>
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Recipient
+                  Package Name
                 </th>
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
                   Status
                 </th>
                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Actions
+                  Current location
                 </th>
               </tr>
             </thead>
-            <tbody class="[&amp;_tr:last-child]:border-0">
-              <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+            <tbody id="package-table-body" class="[&amp;_tr:last-child]:border-0">
+              <!-- <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                 <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
                   <a class="font-medium hover:underline  tracking-id" href="#" rel="ugc">
                     OE31b70H
@@ -534,15 +601,7 @@
                   </div>
                 </td>
                 <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                  <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 mr-2">
-                    Edit
-                  </button>
-                  <button
-                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
-                    color="danger"
-                  >
-                    Delete
-                  </button>
+                  reverse elastico
                 </td>
               </tr>
               <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -561,15 +620,7 @@
                   </div>
                 </td>
                 <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                  <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 mr-2">
-                    Edit
-                  </button>
-                  <button
-                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
-                    color="danger"
-                  >
-                    Delete
-                  </button>
+                 reverse elastico
                 </td>
               </tr>
               <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -588,23 +639,15 @@
                   </div>
                 </td>
                 <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                  <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 mr-2">
-                    Edit
-                  </button>
-                  <button
-                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
-                    color="danger"
-                  >
-                    Delete
-                  </button>
+                 reverse elastico
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
       </div>
     </main>
-    <button
+    <!-- <button
       class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 mr-2"
       type="button"
       aria-haspopup="dialog"
@@ -613,7 +656,7 @@
       data-state="closed"
     >
       Edit
-    </button>
+    </button> -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

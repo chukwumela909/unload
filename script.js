@@ -65,6 +65,7 @@ const createPackage = async () => {
       createPackageData
     );
     console.log("Package updated successfully:", response.data);
+
   } catch (error) {
     console.log("Error updating package:", error);
     return Swal.fire({
@@ -211,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         createPackage();
         // Handle form submission, e.g., send data to server
         console.log("submitted");
-        modal.classList.add("hidden");
+        createModal.classList.add("hidden");
       });
   });
   trackingIds.forEach((trackingId) => {

@@ -1,6 +1,6 @@
 async function fetchPackageDetails(trackingId) {
     try {
-      const response = await axios.get(`http://localhost:1200/package/single/${trackingId}`);
+      const response = await axios.get(`https://consignmentserver.onrender.com/package/single/${trackingId}`);
       const packageData = response.data;
 
       // Template for displaying package details

@@ -61,7 +61,7 @@ const createPackage = async () => {
 
   try {
     const response = await axios.post(
-      `http://localhost:1200/package/create`,
+      `https://consignmentserver.onrender.com/package/create`,
       createPackageData
     );
     console.log("Package updated successfully:", response.data);
@@ -111,7 +111,7 @@ const updatePackage = async () => {
 
   try {
     const response = await axios.post(
-      `http://localhost:1200/package/update/${editTrackingId}`,
+      `https://consignmentserver.onrender.com/package/update/${editTrackingId}`,
       updatePackageData
     );
     console.log("Package updated successfully:", response.data);
@@ -164,7 +164,7 @@ function populateTable(data) {
 // Function to update a package based on tracking ID
 const listPackages = async () => {
   try {
-    const response = await axios.get(`http://localhost:1200/package/packages`);
+    const response = await axios.get(`https://consignmentserver.onrender.com/package/packages`);
     console.log("Packages:", response.data);
 
     // Function to populate the table with data

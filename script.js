@@ -1,8 +1,7 @@
 let trackingIds;
 
 const createPackage = async () => {
-  //Input Fields
-
+  // Input Fields
   const createTrackingId = document.getElementById("create-trackingId").value;
   const createPackageName = document.getElementById("create-packageName").value;
   const createPickup = document.getElementById("create-pickup").value;
@@ -42,7 +41,8 @@ const createPackage = async () => {
       text: "Important fields are missing",
     });
   }
-  //Form data
+
+  // Form data
   const createPackageData = {
     trackingId: createTrackingId,
     packageName: createPackageName,
@@ -64,10 +64,9 @@ const createPackage = async () => {
       `https://consignmentserver.onrender.com/package/create`,
       createPackageData
     );
-    console.log("Package updated successfully:", response.data);
-
+    console.log("Package created successfully:", response.data);
   } catch (error) {
-    console.log("Error updating package:", error);
+    console.log("Error creating package:", error);
     return Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -76,10 +75,45 @@ const createPackage = async () => {
   }
 };
 
-// Function to update a package based on tracking ID
-const updatePackage = async () => {
-  //Input Fields
+// Function to fetch package details and populate the edit form
+const fetchPackageDetails = async (trackingId) => {
+  try {
+    const response = await axios.get(
+      `https://consignmentserver.onrender.com/package/single/${trackingId}`
+    );
+    const packageData = response.data;
 
+    // Populate the edit form fields
+    document.getElementById("trackingId").value = packageData.trackingId;
+    document.getElementById("packageName").value = packageData.packageName;
+    document.getElementById("pickup").value = packageData.pickup;
+    document.getElementById("destination").value = packageData.destination;
+    document.getElementById("current").value = packageData.currentLocation;
+    document.getElementById("checkpoints-1").value =
+      packageData.checkpoints[0] || "";
+    document.getElementById("checkpoints-2").value =
+      packageData.checkpoints[1] || "";
+    document.getElementById("checkpoints-3").value =
+      packageData.checkpoints[2] || "";
+    document.getElementById("checkpoints-4").value =
+      packageData.checkpoints[3] || "";
+    document.getElementById("packageDescription").value =
+      packageData.packageDescription;
+    document.getElementById("packageStatus").value = packageData.packageStatus;
+
+    return packageData;
+  } catch (error) {
+    console.log("Error fetching package details:", error);
+    return Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.response.data.message,
+    });
+  }
+};
+
+const updatePackage = async () => {
+  // Input Fields
   const editTrackingId = document.getElementById("trackingId").value;
   const editPackageName = document.getElementById("packageName").value;
   const editPickup = document.getElementById("pickup").value;
@@ -93,9 +127,8 @@ const updatePackage = async () => {
     document.getElementById("packageDescription").value;
   const editPackageStatus = document.getElementById("packageStatus").value;
 
-  //Form data
+  // Form data
   const updatePackageData = {
-    // trackingId: editTrackingId,
     packageName: editPackageName,
     destination: editDestination,
     pickup: editPickup,
@@ -135,45 +168,44 @@ function populateTable(data) {
       "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted";
 
     tr.innerHTML = `
-          <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-            <a class="font-medium hover:underline tracking-id" href="#" rel="ugc">${
-              item.trackingId
-            }</a>
-          </td>
-          <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">${
-            item.packageName
-          }</td>
-          <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-            <div class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-              item.packageStatus === "In transit"
-                ? "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                : "border-transparent"
-            }">
-              ${item.packageStatus}
-            </div>
-          </td>
-          <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">${
-            item.currentLocation
-          }</td>
-        `;
+      <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+        <a class="font-medium hover:underline tracking-id" href="#" rel="ugc">${
+          item.trackingId
+        }</a>
+      </td>
+      <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">${
+        item.packageName
+      }</td>
+      <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+        <div class="inline-flex w-fit items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
+          item.packageStatus === "In transit"
+            ? "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            : "border-transparent"
+        }">
+          ${item.packageStatus}
+        </div>
+      </td>
+      <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">${
+        item.currentLocation
+      }</td>
+    `;
 
     tbody.appendChild(tr);
   });
+
   trackingIds = document.querySelectorAll(".tracking-id");
 }
 
-// Function to update a package based on tracking ID
 const listPackages = async () => {
   try {
-    const response = await axios.get(`https://consignmentserver.onrender.com/package/packages`);
+    const response = await axios.get(
+      `https://consignmentserver.onrender.com/package/packages`
+    );
     console.log("Packages:", response.data);
 
-    // Function to populate the table with data
-
-    // Populate the table on page load
     populateTable(response.data);
   } catch (error) {
-    console.log("Error getting package:", error);
+    console.log("Error getting packages:", error);
     return Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -193,8 +225,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   createPackageBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    console.log("shapiru");
     createModal.classList.remove("hidden");
+
     window.onclick = function (event) {
       if (event.target == createModal) {
         createModal.classList.add("hidden");
@@ -210,20 +242,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       .addEventListener("click", (event) => {
         event.preventDefault();
         createPackage();
-        // Handle form submission, e.g., send data to server
-        console.log("submitted");
         createModal.classList.add("hidden");
       });
   });
+
   trackingIds.forEach((trackingId) => {
-    trackingId.addEventListener("click", (event) => {
+    trackingId.addEventListener("click", async (event) => {
       event.preventDefault();
-      console.log("you");
       const id = trackingId.innerHTML;
 
-      // Populate the form with existing data
-      document.getElementById("trackingId").value = id;
-      // Fetch and populate other fields here as needed
+      // Fetch and populate the edit form with existing data
+      await fetchPackageDetails(id);
 
       modal.classList.remove("hidden");
     });
@@ -242,28 +271,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("submitForm").addEventListener("click", (event) => {
     event.preventDefault();
     updatePackage();
-    // Handle form submission, e.g., send data to server
-    console.log("submitted");
     modal.classList.add("hidden");
   });
 });
-
-// const updatedPackageData = {
-//   trackingId: trackingId,
-//   packageName: "Updated Package Name",
-//   destination: "New Destination",
-//   currentLocation: "Current Location",
-//   checkpoints: [
-//     {
-//       location: "Location 1",
-//       description: "Checkpoint 1 Description",
-//     },
-//   ],
-//   packageDescription: "Updated Package Description",
-//   packageStatus: "in transit",
-// };
-
-// Function to create a package based on tracking ID
-
-// Example usage
-// updatePackage(trackingIdToUpdate, updatedPackageData);

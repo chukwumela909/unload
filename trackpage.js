@@ -124,7 +124,7 @@ async function fetchPackageDetails(trackingId) {
           <div>
             <div class="text-black/50 text-2xl font-bold text-gray-700 ">Current Location</div>
             <div class="flex items-center space-x-4 mt-3">
-              <div class="flex items-center justify-center p-4 rounded-full ${
+              <div class="flex items-center animate-pulse justify-center p-4 rounded-full ${
                 packageData.packageStatus.toLowerCase() === "delivered"
                   ? "bg-green-600"
                   : "bg-[#FFB400]"

@@ -53,10 +53,53 @@ async function fetchPackageDetails(trackingId) {
               <div class="text-black/50 text-2xl text-gray-700">Pickup Location</div>
               <div class="font-bold text-2xl mt-3">${packageData.pickup.toUpperCase()}</div>
             </div>
-            <div class="p-5 rounded-md border">
-              <div class="text-black/50 text-2xl text-gray-700">Package Arrival And Delivery Date</div>
-              <div class="font-bold text-2xl mt-3">${packageData.dateOfDeparture.toUpperCase().split("T")[0]} - ${packageData.dateOfArrival.toUpperCase().split("T")[0]}</div>
-            </div>
+           <div class="p-5 rounded-md border">
+  <div class="text-black/50 text-2xl text-gray-700">Package Departure Date</div>
+  <div class="font-bold text-2xl mt-3">
+    ${new Date(packageData.dateOfDeparture)
+      .toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+      .replace(/(\d+)(?=,)/, (match) => {
+        const day = parseInt(match);
+        const suffix =
+          day === 1 || day === 21 || day === 31
+            ? "st"
+            : day === 2 || day === 22
+            ? "nd"
+            : day === 3 || day === 23
+            ? "rd"
+            : "th";
+        return `${day}${suffix}`;
+      })}
+  </div>
+</div>
+<div class="p-5 rounded-md border">
+  <div class="text-black/50 text-2xl text-gray-700">Package Arrival Date</div>
+  <div class="font-bold text-2xl mt-3">
+    ${new Date(packageData.dateOfArrival)
+      .toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+      .replace(/(\d+)(?=,)/, (match) => {
+        const day = parseInt(match);
+        const suffix =
+          day === 1 || day === 21 || day === 31
+            ? "st"
+            : day === 2 || day === 22
+            ? "nd"
+            : day === 3 || day === 23
+            ? "rd"
+            : "th";
+        return `${day}${suffix}`;
+      })}
+  </div>
+</div>
+
             <div class="p-5 rounded-md border">
               <div class="text-black/50 text-2xl text-gray-700">Final Destination</div>
               <div class="font-bold text-2xl mt-3">${packageData.destination.toUpperCase()}</div>

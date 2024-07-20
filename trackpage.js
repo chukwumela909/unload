@@ -54,6 +54,10 @@ async function fetchPackageDetails(trackingId) {
               <div class="font-bold text-2xl mt-3">${packageData.pickup.toUpperCase()}</div>
             </div>
             <div class="p-5 rounded-md border">
+              <div class="text-black/50 text-2xl text-gray-700">Package Arrival And Delivery Date</div>
+              <div class="font-bold text-2xl mt-3">${packageData.dateOfDeparture.toUpperCase()} - ${packageData.dateOfArrival.toUpperCase()}</div>
+            </div>
+            <div class="p-5 rounded-md border">
               <div class="text-black/50 text-2xl text-gray-700">Final Destination</div>
               <div class="font-bold text-2xl mt-3">${packageData.destination.toUpperCase()}</div>
             </div>

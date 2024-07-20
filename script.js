@@ -25,6 +25,12 @@ const createPackage = async () => {
   const createPackageStatus = document.getElementById(
     "create-packageStatus"
   ).value;
+  const createdateOfDeparture = document.getElementById(
+    "create-dateOfDeparture"
+  ).value;
+  const createdateOfArrival = document.getElementById(
+    "create-dateOfArrival"
+  ).value;
 
   if (
     createTrackingId == "" ||
@@ -33,6 +39,8 @@ const createPackage = async () => {
     createDestination == "" ||
     createCurrentLocation == "" ||
     createPackageDescription == "" ||
+    createdateOfDeparture == "" ||
+    createdateOfArrival == "" ||
     createPackageStatus == ""
   ) {
     return Swal.fire({
@@ -41,6 +49,8 @@ const createPackage = async () => {
       text: "Important fields are missing",
     });
   }
+  
+
 
   // Form data
   const createPackageData = {
@@ -57,6 +67,8 @@ const createPackage = async () => {
     ],
     packageDescription: createPackageDescription,
     packageStatus: createPackageStatus,
+    dateOfDeparture: createdateOfDeparture,
+    dateOfArrival: createdateOfArrival,
   };
 
   try {
@@ -82,7 +94,7 @@ const fetchPackageDetails = async (trackingId) => {
       `https://consignmentserver.onrender.com/package/single/${trackingId}`
     );
     const packageData = response.data;
-
+    console.log(packageData)
     // Populate the edit form fields
     document.getElementById("trackingId").value = packageData.trackingId;
     document.getElementById("packageName").value = packageData.packageName;
@@ -100,6 +112,8 @@ const fetchPackageDetails = async (trackingId) => {
     document.getElementById("packageDescription").value =
       packageData.packageDescription;
     document.getElementById("packageStatus").value = packageData.packageStatus;
+    document.getElementById("dateOfDeparture").value = packageData.dateOfDeparture.split('T')[0] ?? "";
+    document.getElementById("dateOfArrival").value = packageData.dateOfArrival.split('T')[0];
 
     return packageData;
   } catch (error) {
@@ -126,6 +140,8 @@ const updatePackage = async () => {
   const editPackageDescription =
     document.getElementById("packageDescription").value;
   const editPackageStatus = document.getElementById("packageStatus").value;
+  const editDateOfDeparture = document.getElementById("dateOfDeparture").value;
+  const editDateOfArrival = document.getElementById("dateOfArrival").value;
 
   // Form data
   const updatePackageData = {
@@ -141,6 +157,8 @@ const updatePackage = async () => {
     ],
     packageDescription: editPackageDescription,
     packageStatus: editPackageStatus,
+    dateOfDeparture: editDateOfDeparture,
+    dateOfArrival: editDateOfArrival,
   };
 
   try {
